@@ -1,33 +1,30 @@
-name: Terraform Local
+
+name: Terraform Experiment 9
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   terraform:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
+        uses: hashicorp/setup-terraform@v3
 
-      - name: Init
+      - name: Terraform Init
         run: terraform init
 
-      - name: Plan
+      - name: Terraform Plan
         run: terraform plan
 
-      - name: Apply
+      - name: Terraform Apply
         run: terraform apply -auto-approve
 
 
-      - name: Upload hello.txt
-        uses: actions/upload-artifact@v4
-        with:
-          name: hello-file
-          path: hello.txt
